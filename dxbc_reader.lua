@@ -1,7 +1,7 @@
 
 
 local DataDump = require 'table_dumper'
-
+local inspect = require 'inspect'
 
 local argparse = require 'argparse'
 local arg_parse = argparse('dxbc_reader')
@@ -162,14 +162,21 @@ append("void main(INPUT in) {")
 blocks[1] = {close = {}}
 while idx <= #parse_data do
     local command = parse_data[idx]
+
+    print(string.format('----------------------------------------------'))
+    print(string.format('processing command: %s', inspect(command)))
+
     if command.op then
         local op_name, op_param = get_op(command.op)
-
         if op_name then
+            print(string.format('processing op_name: %s', op_name))
             local op_func = dxbc_def.shader_def[op_name]
             if op_func then
                 pre_process_command(command)
+                print(string.format('processing op_param before: %s', inspect(op_param)))
                 op_param = op_param and arr2dic( op_param) or {}
+                print(string.format('processing op_param after: %s', inspect(op_param)))
+                print(string.format('processing command.args: %s', inspect(command.args)))
                 local op_str, block_tag = op_func(op_param, table.unpack(command.args))
 
                 local last_block = blocks[#blocks]

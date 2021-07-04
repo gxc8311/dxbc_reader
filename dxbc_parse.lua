@@ -1,6 +1,6 @@
 
 local DataDump = require 'table_dumper'
-
+local inspect = require 'inspect'
 local lpeg = require 'lpeg'
 
 local match = lpeg.match
@@ -89,13 +89,27 @@ local function merge_tbl(...)
     return ret
 end
 
-local _abs = C'|' / function()
+-- local _abs = C'|' / function()
+--         return {abs=true}
+--     end
+
+-- TODO abs process
+-- local var = (_negtive^-1*_vector + _negtive^-1 * _abs^-1
+--                 * _var_name * _var_idx^-1 * _var_suffix^-1 * _abs^-1) / merge_tbl
+
+
+local _abss = C"abs(" / function()
         return {abs=true}
     end
 
--- TODO abs process
-local var = (_negtive^-1*_vector + _negtive^-1 * _abs^-1
-                * _var_name * _var_idx^-1 * _var_suffix^-1 * _abs^-1) / merge_tbl
+local _abse = C')' / function()
+        return {abs=true}
+    end
+
+
+local var = (_negtive^-1*_vector + _negtive^-1 * _abss^-1
+                * _var_name * _var_idx^-1 * _var_suffix^-1 * _abse^-1) / merge_tbl
+
 
 local args = var * (space^0*P(",")*space^0 *var + space^0*P("|")*space^0 *var)^0
 
@@ -217,6 +231,7 @@ return function(input)
         local first_op
         local comms = {}
         for _, _line in ipairs(_ret) do
+            print(string.format('parsing line: %s', inspect(_line)))
             if type(_line) ~= 'table' or _line.comment ~= '' then
                 if not first_op and type(_line) == 'table' and _line.comment then
                     comms[#comms+1] = _line.comment
