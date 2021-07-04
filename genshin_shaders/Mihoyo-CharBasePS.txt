@@ -1,0 +1,271 @@
+Shader hash fa6760aa-4ce14fe5-33419720-622f6e73
+
+ps_5_0
+dcl_globalFlags refactoringAllowed
+dcl_immediateConstantBuffer {
+{ 1.0000, 0, 0, 0}, 
+{ 0, 1.0000, 0, 0}, 
+{ 0, 0, 1.0000, 0}, 
+{ 0, 0, 0, 1.0000} }
+dcl_constantbuffer cb0[69], immediateIndexed
+dcl_constantbuffer cb1[8], immediateIndexed
+dcl_sampler s0, mode_default
+dcl_sampler s1, mode_default
+dcl_sampler s2, mode_default
+dcl_resource_texture2d (float,float,float,float) t0
+dcl_resource_texture2d (float,float,float,float) t1
+dcl_resource_texture2d (float,float,float,float) t2
+dcl_input_ps linear v1.xw
+dcl_input_ps linear v2.xy
+dcl_input_ps linear v3.xyzw
+dcl_input_ps linear v4.xyw
+dcl_input_ps linear v5.xyz
+dcl_input_ps linear v5.w
+dcl_input_ps linear v6.xyz
+dcl_input_ps linear v7.xyz
+dcl_output o0.xyzw
+dcl_output o1.xyzw
+dcl_output o2.xyzw
+dcl_output o3.x
+dcl_temps 9
+ne r0.xy, l(0, 0, 0, 0), cb0[47].wxww
+add r0.z, v1.w, l(-0.0100)
+lt r0.z, r0.z, l(0)
+and r0.x, r0.x, r0.z
+discard_nz r0.x
+if_nz r0.y
+lt r0.x, cb0[47].y, l(0.9500)
+if_nz r0.x
+div r0.xy, v4.yxyy, v4.wwww
+mul r0.xy, r0.xyxx, cb1[7].yxyy
+mul r0.xy, r0.xyxx, l(0.2500, 0.2500, 0.0000, 0.0000)
+ge r0.zw, r0.xxxy, -r0.xxxy
+frc r0.xy, abs(r0.xyxx)
+movc r0.xy, r0.zwzz, r0.xyxx, -r0.xyxx
+mul r0.xy, r0.xyxx, l(4.0000, 4.0000, 0.0000, 0.0000)
+ftou r0.xy, r0.xyxx
+dp4 r1.x, cb0[3].xyzw, icb[r0.y + 0].xyzw
+dp4 r1.y, cb0[4].xyzw, icb[r0.y + 0].xyzw
+dp4 r1.z, cb0[5].xyzw, icb[r0.y + 0].xyzw
+dp4 r1.w, cb0[6].xyzw, icb[r0.y + 0].xyzw
+dp4 r0.x, r1.xyzw, icb[r0.x + 0].xyzw
+mad r0.x, cb0[47].y, l(17.0000), -r0.x
+add r0.x, r0.x, l(-0.0100)
+lt r0.x, r0.x, l(0)
+discard_nz r0.x
+endif
+endif
+add r0.xyz, -v5.xyzx, cb1[5].xyzx
+dp3 r0.w, r0.xyzx, r0.xyzx
+rsq r0.w, r0.w
+lt r1.x, l(0.5000), cb0[65].w
+mov r2.x, cb0[65].x
+mov r2.yz, -cb0[65].yyzy
+movc r1.xyz, r1.xxxx, r2.xyzx, cb0[61].xyzx
+mad r0.xyz, r0.xyzx, r0.wwww, r1.xyzx
+dp3 r0.w, r0.xyzx, r0.xyzx
+rsq r0.w, r0.w
+mul r0.xyz, r0.wwww, r0.xyzx
+add r0.w, cb0[47].z, l(-1.0000)
+sample_b(texture2d)(float,float,float,float) r1.xyzw, v2.xyxx, t0.xyzw, s0, r0.w
+eq r2.xyz, cb0[13].xxxx, l(3.0000, 1.0000, 2.0000, 0.0000)
+mul r2.w, r1.w, cb0[21].y
+add r3.xyz, -r1.xyzx, cb0[22].xyzx
+mad r3.xyz, r2.wwww, r3.xyzx, r1.xyzx
+movc r1.xyz, r2.xxxx, r3.xyzx, r1.xyzx
+add r2.x, r1.w, -cb0[13].y
+lt r2.x, r2.x, l(0)
+and r2.x, r2.y, r2.x
+discard_nz r2.x
+sample_b(texture2d)(float,float,float,float) r3.xyzw, v2.xyxx, t1.xyzw, s1, r0.w
+ne r2.xy, l(0, 0, 0, 0), cb0[16].xyxx
+movc r0.w, r2.x, r3.y, l(1.0000)
+ne r2.x, l(0, 0, 0, 0), cb0[31].x
+ge r4.xyzw, r3.wwww, l(0.8000, 0.4000, 0.2000, 0.6000)
+and r2.x, r2.x, r4.x
+movc r2.x, r2.x, l(2.0000), l(1.0000)
+ne r2.w, l(0, 0, 0, 0), cb0[34].w
+and r2.w, r4.y, r2.w
+lt r5.xyz, r3.wwww, l(0.6000, 0.4000, 0.8000, 0.0000)
+and r2.w, r2.w, r5.x
+movc r2.x, r2.w, l(3.0000), r2.x
+ne r2.w, l(0, 0, 0, 0), cb0[38].w
+and r2.w, r4.z, r2.w
+and r2.w, r5.y, r2.w
+movc r2.x, r2.w, l(4.0000), r2.x
+ne r2.w, l(0, 0, 0, 0), cb0[42].w
+and r2.w, r4.w, r2.w
+and r2.w, r5.z, r2.w
+movc r2.x, r2.w, l(5.0000), r2.x
+eq r4.xyzw, r2.xxxx, l(2.0000, 3.0000, 4.0000, 5.0000)
+movc r5.xyz, r4.xxxx, cb0[31].yzwy, cb0[10].xyzx
+movc r5.xyz, r4.yyyy, cb0[35].xyzx, r5.xyzx
+movc r5.xyz, r4.zzzz, cb0[39].xyzx, r5.xyzx
+movc r5.xyz, r4.wwww, cb0[43].xyzx, r5.xyzx
+mul r1.xyz, r1.xyzx, r5.xyzx
+lt r2.w, l(0.0100), r1.w
+and r2.z, r2.w, r2.z
+and r1.w, r1.w, r2.z
+sample_indexable(texture2d)(float,float,float,float) r2.w, v6.xyxx, t2.xyzw, s2
+max r3.y, cb0[25].y, l(0.0000)
+add r3.w, -r3.y, v6.z
+max r3.w, r3.w, l(0.0001)
+add r3.y, r3.y, v6.z
+min r3.yw, r3.yyyw, l(0.0000, 0.9999, 0.0000, 0.9989)
+add r3.y, -r3.w, r3.y
+add r2.w, r2.w, -r3.w
+div r3.y, l(1.0000, 1.0000, 1.0000, 1.0000), r3.y
+mul_sat r2.w, r2.w, r3.y
+mad r3.y, r2.w, l(-2.0000), l(3.0000)
+mul r2.w, r2.w, r2.w
+mul r3.w, r2.w, r3.y
+mul r5.x, r0.w, v1.x
+movc r0.w, r2.y, r5.x, r0.w
+lt r2.y, r0.w, l(0.0500)
+lt r5.x, l(0.9500), r0.w
+add r0.w, r0.w, v3.w
+mul r0.w, r0.w, l(0.5000)
+movc r0.w, r5.x, l(1.0000), r0.w
+movc r0.w, r2.y, l(0), r0.w
+lt r2.y, r0.w, cb0[16].z
+if_nz r2.y
+ne r2.y, l(0, 0, 0, 0), cb0[19].y
+movc r5.xy, r4.xxxx, cb0[34].yzyy, cb0[19].zwzz
+movc r5.xy, r4.yyyy, cb0[38].yzyy, r5.xyxx
+movc r5.xy, r4.zzzz, cb0[42].yzyy, r5.xyxx
+movc r5.xy, r4.wwww, cb0[46].yzyy, r5.xyxx
+add r0.w, -r0.w, cb0[16].z
+div r0.w, r0.w, r5.x
+ge r4.w, r0.w, l(1.0000)
+add r0.w, r0.w, l(0.0100)
+log r0.w, r0.w
+mul r0.w, r0.w, r5.y
+exp r0.w, r0.w
+min r0.w, r0.w, l(1.0000)
+movc r0.w, r4.w, l(1.0000), r0.w
+movc r0.w, r2.y, r0.w, l(1.0000)
+mov r2.y, l(0)
+else
+mov r0.w, l(0)
+mov r2.y, l(1.0000)
+endif
+lt r4.w, l(0.5000), r3.x
+min r3.w, r3.w, r2.y
+movc r2.y, r4.w, r3.w, r2.y
+add r2.y, -r2.y, l(1.0000)
+ne r3.w, l(0, 0, 0, 0), v5.w
+lt r4.w, l(0.5000), cb0[61].w
+add r5.x, cb0[60].w, cb0[60].w
+min r5.x, r5.x, l(1.0000)
+movc r4.w, r4.w, r5.x, l(1.0000)
+eq r2.x, r2.x, l(1.0000)
+if_nz r2.x
+ne r5.x, l(0, 0, 0, 0), cb0[17].w
+add r5.yzw, cb0[17].xxyz, -cb0[18].xxyz
+mad r5.yzw, cb0[58].yyyy, r5.yyzw, cb0[18].xxyz
+movc r5.xyz, r5.xxxx, r5.yzwy, cb0[17].xyzx
+else
+if_nz r4.x
+ne r5.w, l(0, 0, 0, 0), cb0[17].w
+add r6.xyz, cb0[32].xyzx, -cb0[33].xyzx
+mad r6.xyz, cb0[58].yyyy, r6.xyzx, cb0[33].xyzx
+movc r5.xyz, r5.wwww, r6.xyzx, cb0[32].xyzx
+else
+ne r5.w, l(0, 0, 0, 0), cb0[17].w
+add r6.xyz, cb0[36].xyzx, -cb0[37].xyzx
+mad r6.xyz, cb0[58].yyyy, r6.xyzx, cb0[37].xyzx
+movc r6.xyz, r5.wwww, r6.xyzx, cb0[36].xyzx
+add r7.xyz, cb0[40].xyzx, -cb0[41].xyzx
+mad r7.xyz, cb0[58].yyyy, r7.xyzx, cb0[41].xyzx
+movc r7.xyz, r5.wwww, r7.xyzx, cb0[40].xyzx
+add r8.xyz, cb0[44].xyzx, -cb0[45].xyzx
+mad r8.xyz, cb0[58].yyyy, r8.xyzx, cb0[45].xyzx
+movc r8.xyz, r5.wwww, r8.xyzx, cb0[44].xyzx
+movc r7.xyz, r4.zzzz, r7.xyzx, r8.xyzx
+movc r5.xyz, r4.yyyy, r6.xyzx, r7.xyzx
+endif
+endif
+lt r5.w, r4.w, l(1.0000)
+and r6.xyz, r5.xyzx, r5.wwww
+ne r6.w, l(0, 0, 0, 0), cb0[19].y
+not r7.x, r3.w
+and r6.w, r6.w, r7.x
+add r7.xyz, r5.xyzx, l(-1.0000, -1.0000, -1.0000, 0.0000)
+mad r7.xyz, r0.wwww, r7.xyzx, l(1.0000, 1.0000, 1.0000, 0.0000)
+movc r5.xyz, r6.wwww, r7.xyzx, r5.xyzx
+mad r0.w, -r3.y, r2.w, l(1.0000)
+add r7.xyz, r5.xyzx, l(-1.0000, -1.0000, -1.0000, 0.0000)
+mad r7.xyz, r0.wwww, r7.xyzx, l(1.0000, 1.0000, 1.0000, 0.0000)
+movc r5.xyz, r3.wwww, r5.xyzx, r7.xyzx
+ne r0.w, l(0, 0, 0, 0), r2.y
+or r0.w, r0.w, r3.w
+mul r5.xyz, r1.xyzx, r5.xyzx
+mul r7.xyz, r1.xyzx, cb0[56].wwww
+movc r5.xyz, r0.wwww, r5.xyzx, r7.xyzx
+mul r7.xyz, r1.xyzx, r6.xyzx
+mad r6.xyz, -r1.xyzx, r6.xyzx, r5.xyzx
+mad r6.xyz, r4.wwww, r6.xyzx, r7.xyzx
+movc r5.xyz, r5.wwww, r6.xyzx, r5.xyzx
+movc r0.w, r4.z, cb0[41].w, cb0[45].w
+movc r2.y, r4.z, cb0[42].x, cb0[46].x
+movc r0.w, r4.y, cb0[37].w, r0.w
+movc r2.y, r4.y, cb0[38].x, r2.y
+movc r0.w, r4.x, cb0[33].w, r0.w
+movc r2.y, r4.x, cb0[34].x, r2.y
+movc r0.w, r2.x, cb0[20].w, r0.w
+movc r2.x, r2.x, cb0[21].x, r2.y
+dp3 r0.x, v3.xyzx, r0.xyzx
+max r0.x, r0.x, l(0.0010)
+log r0.x, r0.x
+mul r0.x, r0.x, r0.w
+exp r0.x, r0.x
+add r0.y, -r3.z, l(1.0000)
+lt r0.x, r0.y, r0.x
+mul r0.yzw, r2.xxxx, cb0[20].xxyz
+mul r0.yzw, r3.xxxx, r0.yyzw
+and r0.yzw, r0.yyzw, r0.xxxx
+mul r0.yzw, r0.yyzw, cb0[56].wwww
+and r0.xyz, r0.yzwy, r0.xxxx
+mul r1.xyz, r1.xyzx, cb0[26].xyzx
+mul r2.xyw, r4.wwww, r0.xyxz
+movc r0.xyz, r5.wwww, r2.xywx, r0.xyzx
+add r0.xyz, r0.xyzx, r5.xyzx
+mad r1.xyz, r1.xyzx, cb0[25].zzzz, -r0.xyzx
+mad r1.xyz, r1.wwww, r1.xyzx, r0.xyzx
+movc r0.xyz, r2.zzzz, r1.xyzx, r0.xyzx
+add r1.xyz, -v7.xyzx, cb1[5].xyzx
+dp3 r0.w, r1.xyzx, r1.xyzx
+rsq r0.w, r0.w
+mul r1.xyz, r0.wwww, r1.xyzx
+dp3 r0.w, v3.xyzx, v3.xyzx
+rsq r0.w, r0.w
+mul r2.xyz, r0.wwww, v3.xyzx
+dp3 r0.w, r1.xyzx, r2.xyzx
+add r0.w, -r0.w, l(1.0000)
+max r0.w, r0.w, l(0.0001)
+log r0.w, r0.w
+mul r0.w, r0.w, cb0[68].x
+exp r0.w, r0.w
+add r1.x, -r1.w, l(1.0000)
+mad o2.x, cb0[68].z, r1.x, r1.w
+max r1.xyz, cb0[66].xyzx, cb0[67].xyzx
+mul r1.xyz, r0.wwww, r1.xyzx
+mad r0.xyz, r1.xyzx, cb0[68].yyyy, r0.xyzx
+max r1.x, r0.z, r0.y
+max r1.w, r0.x, r1.x
+lt r2.x, l(1.0000), r1.w
+div r1.xyz, r0.xyzx, r1.wwww
+mov r0.w, l(1.0000)
+movc r0.xyzw, r2.xxxx, r1.xyzw, r0.xyzw
+lt r1.x, v3.z, l(0)
+movc o0.w, r1.x, l(0), l(1.0000)
+ne r1.x, l(0, 0, 0, 0), cb0[9].x
+mul r1.y, cb0[9].y, l(0.0039)
+and o2.z, r1.y, r1.x
+mad o0.xy, v3.xyxx, l(0.5000, 0.5000, 0.0000, 0.0000), l(0.5000, 0.5000, 0.0000, 0.0000)
+mov o0.z, v5.w
+mul o1.xyzw, r0.xyzw, l(1.0000, 1.0000, 1.0000, 0.0500)
+mov o2.y, l(0)
+mov o2.w, v5.w
+mov o3.x, l(0.0157)
+ret
