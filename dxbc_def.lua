@@ -182,16 +182,40 @@ local function get_var_name(register, swizzle, sep_suffix)
 end
 
 m.shader_def = {
-    ['dp%d(.*)'] = function(op_args, a, b, c)
+    ['dp2'] = function(op_args, a, b, c)
         local namea = get_var_name(a)
         local nameb = get_var_name(b)
         local namec = get_var_name(c)
         if op_args._sat then
-            return _format('%s = saturate(dot(%s, %s))', namea, nameb, namec)
+            return _format('%s = saturate(dot2(%s, %s))', namea, nameb, namec)
         else
-            return _format('%s = dot(%s, %s)', namea, nameb, namec)
+            return _format('%s = dot2(%s, %s)', namea, nameb, namec)
         end
     end,
+
+    ['dp3'] = function(op_args, a, b, c)
+        local namea = get_var_name(a)
+        local nameb = get_var_name(b)
+        local namec = get_var_name(c)
+        if op_args._sat then
+            return _format('%s = saturate(dot3(%s, %s))', namea, nameb, namec)
+        else
+            return _format('%s = dot3(%s, %s)', namea, nameb, namec)
+        end
+    end,
+
+    ['dp4'] = function(op_args, a, b, c)
+        local namea = get_var_name(a)
+        local nameb = get_var_name(b)
+        local namec = get_var_name(c)
+        if op_args._sat then
+            return _format('%s = saturate(dot4(%s, %s))', namea, nameb, namec)
+        else
+            return _format('%s = dot4(%s, %s)', namea, nameb, namec)
+        end
+    end,
+
+
     ['[d]?mov(.*)'] = function(op_args, a, b)
         if op_args._sat then
             return _format('%s = saturate(%s)', get_var_name(a), get_var_name(b, a))
